@@ -12,7 +12,7 @@ import 'package:fullstack/widgets/video_tile_tap.dart';
 final GoogleSignIn googleSignIn = GoogleSignIn(
   scopes: [
     'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
+    // 'https://www.googleapis.com/auth/contacts.readonly',
   ],
 );
 
@@ -193,11 +193,10 @@ class _HomePageState extends State<HomePage> {
       await getVideoForUser(account.id);
     } else {
       setState(() {
-        isAuth = false;
+        _nowPlayingIndex = 0;
         _isLoaded = false;
+        isAuth = false;
       });
-
-      _chewieController?.pause();
     }
   }
 
@@ -206,6 +205,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   logout() async {
+    _chewieController?.pause();
     setState(() {
       errorWidget = Center(
         child: CircularProgressIndicator(),
