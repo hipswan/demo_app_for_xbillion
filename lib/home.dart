@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
         _isLoaded = false;
       });
 
-      _chewieController.pause();
+      _chewieController?.pause();
     }
   }
 
