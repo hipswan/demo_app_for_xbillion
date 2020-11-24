@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
 
   handleSignIn(GoogleSignInAccount account) async {
     if (account != null) {
-      // print('User logged in as $account');
+      print('User logged in as ${account.id}');
       setState(() {
         isAuth = true;
       });
