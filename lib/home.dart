@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool isAuth = false;
   VideoPlayerController _videoPlayerController;
   ChewieController _chewieController;
