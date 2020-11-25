@@ -9,11 +9,7 @@ import 'package:video_player/video_player.dart';
 import 'package:fullstack/widgets/video_tile.dart';
 import 'package:fullstack/widgets/video_tile_tap.dart';
 
-final GoogleSignIn googleSignIn = GoogleSignIn(
-  scopes: [
-    'https://mail.google.com/',
-  ],
-);
+final GoogleSignIn googleSignIn = GoogleSignIn();
 
 class HomePage extends StatefulWidget {
   @override
