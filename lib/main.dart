@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
       title: 'FullStack',
       theme: ThemeData.dark().copyWith(
         primaryColor: Colors.red,
+        accentColor: Colors.white,
       ),
       home: HomePage(),
     );
