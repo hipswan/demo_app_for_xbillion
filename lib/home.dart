@@ -9,12 +9,11 @@ import 'package:video_player/video_player.dart';
 import 'package:fullstack/widgets/video_tile.dart';
 import 'package:fullstack/widgets/video_tile_tap.dart';
 
-final GoogleSignIn googleSignIn = GoogleSignIn(
-  scopes: [
-    'email',
-    // 'https://www.googleapis.com/auth/contacts.readonly',
-  ],
-);
+// scopes: [
+//   'email',
+//   // 'https://www.googleapis.com/auth/contacts.readonly',
+// ],
+final GoogleSignIn googleSignIn = GoogleSignIn();
 
 class HomePage extends StatefulWidget {
   @override
