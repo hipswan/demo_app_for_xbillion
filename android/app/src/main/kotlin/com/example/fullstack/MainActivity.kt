@@ -1,4 +1,4 @@
-package com.fullstack.xbillion
+package com.flutter.xbillions
 
 import io.flutter.embedding.android.FlutterActivity
 
