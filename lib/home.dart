@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
       autoInitialize: true,
-      aspectRatio: 4 / 3,
+      aspectRatio: 16 / 10,
       autoPlay: true,
       showControls: true,
       deviceOrientationsAfterFullScreen: [
@@ -304,78 +304,88 @@ class _HomePageState extends State<HomePage> {
         title: Text('FullStack'),
       ),
       body: _isLoaded
-          ? Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  child: playerWidget,
-                ),
-                Expanded(
-                  child: Container(
-                    child: ListView.builder(
-                      itemExtent: 75,
-                      itemCount: videos.length,
-                      itemBuilder: (context, index) {
-                        return _isLoaded
-                            ? VideoTileTap(
-                                color: _nowPlayingIndex == index
-                                    ? Colors.grey[700]
-                                    : Colors.black,
-                                onTap: () {
-                                  _startPlay(
-                                      videos[index]["url"].toString().trim(),
-                                      index);
-                                },
-                                child: VideoTile(
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 3,
-                                    style: _nowPlayingIndex == index
-                                        ? BorderStyle.solid
-                                        : BorderStyle.none,
-                                  ),
-                                  title:
-                                      '${videos[index]["title"].toString().trim()}',
-                                  image:
-                                      '${videos[index]["thumb"].toString().trim()}',
-                                  playingNow: (_nowPlayingIndex == index)
-                                      ? IconButton(
-                                          focusColor: Colors.redAccent,
-                                          icon: Icon(
-                                            isPlaying
-                                                ? Icons.pause_circle_filled
-                                                : Icons.play_circle_filled,
-                                            color: Colors.white,
-                                            size: 40,
-                                          ),
-                                          onPressed: () async {
-                                            _videoPlayerController
-                                                    .value.isPlaying
-                                                ? await _chewieController
-                                                    .pause()
-                                                : await _chewieController
-                                                    .play();
-                                            _videoPlayerController
-                                                    .value.isPlaying
-                                                ? setState(() {
-                                                    isPlaying = true;
-                                                  })
-                                                : setState(() {
-                                                    isPlaying = false;
-                                                  });
-                                          },
-                                        )
-                                      : Text(""),
-                                ),
-                              )
-                            : Center(
-                                child: CircularProgressIndicator(),
-                              );
-                      },
+          ? OrientationBuilder(
+              builder: (context, orientation) {
+                return Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      color: Colors.black,
+                      height: orientation == Orientation.landscape
+                          ? MediaQuery.of(context).size.height / 2
+                          : MediaQuery.of(context).size.height / 3,
+                      child: playerWidget,
                     ),
-                  ),
-                ),
-              ],
+                    Expanded(
+                      child: Container(
+                        child: ListView.builder(
+                          itemExtent: 75,
+                          itemCount: videos.length,
+                          itemBuilder: (context, index) {
+                            return _isLoaded
+                                ? VideoTileTap(
+                                    color: _nowPlayingIndex == index
+                                        ? Colors.grey[700]
+                                        : Colors.black,
+                                    onTap: () {
+                                      _startPlay(
+                                          videos[index]["url"]
+                                              .toString()
+                                              .trim(),
+                                          index);
+                                    },
+                                    child: VideoTile(
+                                      border: Border.all(
+                                        color: Colors.white,
+                                        width: 3,
+                                        style: _nowPlayingIndex == index
+                                            ? BorderStyle.solid
+                                            : BorderStyle.none,
+                                      ),
+                                      title:
+                                          '${videos[index]["title"].toString().trim()}',
+                                      image:
+                                          '${videos[index]["thumb"].toString().trim()}',
+                                      playingNow: (_nowPlayingIndex == index)
+                                          ? IconButton(
+                                              focusColor: Colors.redAccent,
+                                              icon: Icon(
+                                                isPlaying
+                                                    ? Icons.pause_circle_filled
+                                                    : Icons.play_circle_filled,
+                                                color: Colors.white,
+                                                size: 40,
+                                              ),
+                                              onPressed: () async {
+                                                _videoPlayerController
+                                                        .value.isPlaying
+                                                    ? await _chewieController
+                                                        .pause()
+                                                    : await _chewieController
+                                                        .play();
+                                                _videoPlayerController
+                                                        .value.isPlaying
+                                                    ? setState(() {
+                                                        isPlaying = true;
+                                                      })
+                                                    : setState(() {
+                                                        isPlaying = false;
+                                                      });
+                                              },
+                                            )
+                                          : Text(""),
+                                    ),
+                                  )
+                                : Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
             )
           : errorWidget,
     );
