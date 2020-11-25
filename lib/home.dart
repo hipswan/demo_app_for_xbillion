@@ -35,8 +35,8 @@ class _HomePageState extends State<HomePage> {
   int _nowPlayingIndex;
   bool isPlaying = true;
   Future<void> _initializePlay(String videoPath) async {
-    // _chewieController.dispose();
-    // _videoPlayerController.dispose();_chewieController?.dispose();
+    // _chewieController?.dispose();
+    // _videoPlayerController?.dispose();
     _videoPlayerController = new VideoPlayerController.network(videoPath);
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
@@ -71,6 +71,22 @@ class _HomePageState extends State<HomePage> {
           DeviceOrientation.portraitUp,
           DeviceOrientation.portraitDown,
         ]);
+      }
+    });
+    _videoPlayerController.addListener(() {
+      if (_videoPlayerController.value.initialized &&
+          !_videoPlayerController.value.isPlaying) {
+        // print("paused");
+        setState(() {
+          isPlaying = false;
+        });
+      }
+      if (_videoPlayerController.value.initialized &&
+          _videoPlayerController.value.isPlaying) {
+        // print("play");
+        setState(() {
+          isPlaying = true;
+        });
       }
     });
     _videoPlayerController.addListener(checkIfVideoFinished);
