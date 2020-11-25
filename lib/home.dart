@@ -11,7 +11,7 @@ import 'package:fullstack/widgets/video_tile_tap.dart';
 
 // scopes: [
 //   'email',
-//   // 'https://www.googleapis.com/auth/contacts.readonly',
+//     'https://www.googleapis.com/auth/contacts.readonly',
 // ],
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
